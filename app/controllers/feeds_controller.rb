@@ -12,7 +12,15 @@ class FeedsController < ApplicationController
 
   # GET /feeds/new
   def new
-    @feed = Feed.new
+    if params[:back]
+      @feed = Feed.new(feed_params)
+    else
+      @feed = Feed.new
+    end
+  end
+
+  def confirm
+    @feed = Feed.new(feed_params)
   end
 
   # GET /feeds/1/edit
@@ -65,6 +73,6 @@ class FeedsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def feed_params
-      params.require(:feed).permit(:image, :image_ca)
+      params.require(:feed).permit(:image, :image_cache)
     end
 end
