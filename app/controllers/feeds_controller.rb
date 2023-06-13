@@ -8,6 +8,8 @@ class FeedsController < ApplicationController
 
   # GET /feeds/1 or /feeds/1.json
   def show
+    @feed = Feed.find_by(id: params[:id])
+    @user = User.find_by(id: @feed.user_id)
   end
 
   # GET /feeds/new
@@ -21,6 +23,8 @@ class FeedsController < ApplicationController
 
   def confirm
     @feed = Feed.new(feed_params)
+    @feed.user_id = current_user.id
+    render :new if @feed.invalid?
   end
 
   # GET /feeds/1/edit
@@ -29,7 +33,9 @@ class FeedsController < ApplicationController
 
   # POST /feeds or /feeds.json
   def create
-    @feed = Feed.new(feed_params)
+    # @feed = Feed.new(feed_params)
+    # @feed.user_id = current_user.id
+    @feed =  current_user.feeds.build(feed_params)
 
     respond_to do |format|
       if @feed.save
