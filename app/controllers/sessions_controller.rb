@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       flash[:danger] = 'ログインに失敗しました'
       render :new
   end
-#
+
   def destroy
     session.delete(:user_id)
     flash[:notice] = 'ログアウトしました'
