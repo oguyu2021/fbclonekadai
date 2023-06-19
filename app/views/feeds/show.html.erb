@@ -1,5 +1,4 @@
 <h1>詳細画面</h1>
-<p>タイトル: <%= @feed.title %></p>
 <p>内容: <%= @feed.content %></p>
 
 <p id="notice"><%= notice %></p>
@@ -9,8 +8,8 @@
   <%= image_tag @feed.image.url %>
 </p>
 
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
-<%= link_to 'Back', feeds_path %>
+<%= link_to '編集', edit_feed_path(@feed) %> |
+<%= link_to '戻る', feeds_path %>
 
 <% unless @feed.user_id == current_user.id %>
   <% if @favorite.present? %>

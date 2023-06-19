@@ -4,18 +4,18 @@
 
 <table class = "table">
   <tr>
-    <th>タイトル</th>
     <th>内容</th>
     <th>投稿者</th>
   </tr>
 
 <% @feeds.each do |feed| %>
   <tr>
-    <td><%= feed.title %></td>
     <td><%= feed.content %></td>
     <td><%= feed.user.name %></td>
+    <td><%= image_tag feed.image.url %></td>
     <td><%= link_to '詳細', feed_path(feed.id) %></td>
     <td><%= link_to '編集', edit_feed_path(feed.id) %></td>
+    <td><%= link_to '削除', feed_path(feed.id), method: :delete %></td>
   </tr>
 <% end %>
 </table>

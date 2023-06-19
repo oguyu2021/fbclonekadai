@@ -18,8 +18,7 @@ class FeedsController < ApplicationController
   end
 
   def confirm
-    @feed = Feed.new(feed_params)
-    @feed =  current_user.feeds.build(feed_params)
+    @feed = current_user.feeds.build(feed_params)
     render :new if @feed.invalid?
   end
 
@@ -32,7 +31,7 @@ class FeedsController < ApplicationController
       render :new
     else
       if @feed.save
-        redirect_to blogs_path, notice: "ブログを作成しました！"
+        redirect_to feeds_path, notice: "ブログを作成しました！"
       else
       render :new
       end
@@ -41,7 +40,7 @@ class FeedsController < ApplicationController
 
   def update
       if @feed.update(feed_params)
-        redirect_to blogs_path, notice: "ブログを編集しました！"
+        redirect_to feeds_path, notice: "ブログを編集しました！"
       else
         render :edit
       end
@@ -49,7 +48,7 @@ class FeedsController < ApplicationController
 
   def destroy
     @feed.destroy
-    redirect_to blogs_path, notice: "ブログ削除しました！"
+    redirect_to feeds_path, notice: "ブログ削除しました！"
   end
 
   private
@@ -60,6 +59,6 @@ class FeedsController < ApplicationController
 
     
     def feed_params
-      params.require(:feed).permit(:image, :image_cache)
+      params.require(:feed).permit(:content, :image, :image_cache)
     end
 end
